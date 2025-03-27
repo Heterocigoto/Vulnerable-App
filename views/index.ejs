@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/resources/css/index.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Dashboard</h1>
+        <p>Bienvenido, <strong><%= user %></strong></p>
+        <!-- Botón de Logout -->
+        <form action="/logout" method="POST" class="logout-form">
+            <button type="submit" class="logout-button">Cerrar Sesión</button>
+        </form>
+    </header>
+    <main class="main">
+        <section class="stats-section">
+            <h2>Estadísticas Generales</h2>
+            <div class="stats">
+                <div class="stat">
+                    <h3>Total de Usuarios</h3>
+                    <p>150</p>
+                </div>
+                <div class="stat">
+                    <h3>Roles de Administrador</h3>
+                    <p>10</p>
+                </div>
+                <div class="stat">
+                    <h3>Roles de Usuario</h3>
+                    <p>140</p>
+                </div>
+            </div>
+        </section>
+        <section class="users-section">
+            <h2>Últimos Usuarios Registrados</h2>
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Rol</th>
+                        <th>Fecha de Registro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>admin1</td>
+                        <td>Juan Pérez</td>
+                        <td>Administrador</td>
+                        <td>2025-03-25</td>
+                    </tr>
+                    <tr>
+                        <td>user123</td>
+                        <td>María López</td>
+                        <td>Usuario</td>
+                        <td>2025-03-24</td>
+                    </tr>
+                    <tr>
+                        <td>user456</td>
+                        <td>Carlos García</td>
+                        <td>Usuario</td>
+                        <td>2025-03-23</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 - Vulnerable App</p>
+    </footer>
+</body>
+</html>

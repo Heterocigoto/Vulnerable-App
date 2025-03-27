@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Compra de Autos</title>
+    <link rel="stylesheet" href="/resources/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Crear un usuario</h2>
+        <form action="/register" method="POST">
+            <input name="user" id="user" placeholder="Usuario" required>
+            <input name="name" id="name" placeholder="Nombre" required>
+            <label for="rol">Rol</label>
+            <select id="rol" name="rol">
+                <option value="Admin">Administrador</option>
+                <option value="User">Usuario</option>
+            </select>
+            <input name="password" id="password" type="password" placeholder="Contraseña" required>
+            <div>
+                <a href="/login">Ya tienes una cuenta?</a>
+                <button type="submit" value="Save">Crear cuenta</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

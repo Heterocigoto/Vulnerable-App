@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Compra de Autos</title>
+    <link rel="stylesheet" href="/resources/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form action="auth" method="POST">
+            <input name="user" id="user" placeholder="Usuario" required>
+            <input name="password" type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <div class="login-container">
+        <h2>No tienes una cuenta?</h2>
+        <h2><a href="/register">Regístrate</a></h2>
+    </div>
+
+
+    <div style="display: block;">
+        <h3><%= alert %></h1>
+    </div>
+</body>
+</html>
