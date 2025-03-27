@@ -58,44 +58,40 @@ app.post('/register', async (req, res)=>{
 }
 });
 
-app.post('/auth', async (req, res)=>{
+app.post('/auth', async (req, res) => {
     const user = req.body.user;
     const pass = req.body.password;
 
-    if (user && pass ) {
-        const query = `SELECT * FROM Users WHERE user = '${user}'`;
+    const salt = await bcryptjs.genSalt();
+    const passwordHash = await bcryptjs.hash(pass, salt);
+
+    if (user && pass) {
+        // VULNERABLE QUERY: Directly concatenating user input (NO prepared statements)
+        const query = `SELECT * FROM Users WHERE user = '${user}' AND pass = '${passwordHash}'`;
+
         try {
-        connection.query(query, async (error, results) => {
-            if (error) {
-                console.error('Error en la consulta:', error);
-                return res.render('login', { alert: 'Error en la autenticación' });
-            }
-            
-            if (results.length == 0) {
-                return res.render('login', { alert: 'Usuario y/o contraseña incorrectos' });
-            }
-            
-            const hashedPassword = results[0].pass;
-            if(isString(hashedPassword)){
-            const passwordMatch = await bcryptjs.compare(pass, hashedPassword);
-                if (passwordMatch) {
+            connection.query(query, (error, results) => {
+                if (error) {
+                    console.error('Error en la consulta:', error);
+                    return res.render('login', { alert: 'Error en la autenticación' });
+                }
+
+                // If any results are returned, login is successful
+                if (results.length > 0) {
                     req.session.loggedin = true;
                     req.session.user = results[0].user;
                     res.render('index', { user: results[0].user });
                 } else {
                     res.render('login', { alert: 'Usuario y/o contraseña incorrectos' });
                 }
-            }
-
-        });
-    }catch (error) {
-        console.error('Error en la autenticación:', error);
-        return res.render('login', { alert: 'Error en la autenticación' });
-    }
+            });
+        } catch (error) {
+            console.error('Error en la autenticación:', error);
+            return res.render('login', { alert: 'Error en la autenticación' });
+        }
     } else {
         res.render('login', { alert: 'Por favor ingrese usuario y contraseña' });
     }
-
 });
 
 app.get('/index', (req, res)=>{
